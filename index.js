@@ -27,7 +27,6 @@ angular
         element.style.height = newHeightCss;
       });
 
-      $rootScope.$broadcast('angularMatchHeight::resized');
     }
 
     function removeSame(selector, element) {
@@ -42,9 +41,13 @@ angular
     };
 
     var findTargetElements = function(selector, element) {
-      element[0].querySelectorAll(selector).filter(function(el) {
-        return !isHidden(el)
-      });
+      var elements = Array.prototype.slice.call(element[0].querySelectorAll(selector));
+      if(elements) {
+        elements.filter(function(el) {
+          return !isHidden(el)
+        });
+      }
+      return elements;
     };
 
     function isHidden(element) {
@@ -96,6 +99,7 @@ angular
                   removeSame(selector, element);
                 }
               }
+              $rootScope.$broadcast('angularMatchHeight::resized');
             }
 
             var resizeTimer;
