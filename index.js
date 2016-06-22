@@ -1,6 +1,6 @@
 angular
   .module('partnermarketing.matchHeight', [])
-  .directive('matchHeight', ['$window', function ($window) {
+  .directive('matchHeight', ['$rootScope', '$window', function ($rootScope, $window) {
 
     'use strict';
 
@@ -26,6 +26,8 @@ angular
       elements.map(function(element) { 
         element.style.height = newHeightCss;
       });
+
+      $rootScope.$broadcast('angularMatchHeight::resized');
     }
 
     function removeSame(selector, element) {
