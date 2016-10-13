@@ -93,7 +93,7 @@ angular
                 var selector = mediaQueriesAndTargets[i][1];
 
                 if (mediaQuery === '*' ||
-                    (typeof $window.matchMedia !== 'undefined' && $window.matchMedia(mediaQuery))) {
+                    (typeof $window.matchMedia !== 'undefined' && $window.matchMedia(mediaQuery).matches)) {
                   same(selector, element);
                 } else {
                   removeSame(selector, element);
